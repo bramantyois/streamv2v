@@ -20,6 +20,8 @@
   let currentQueueSize: number = 0;
   let queueCheckerRunning: boolean = false;
   let warningMessage: string = '';
+  let showOriginal: boolean = true;
+  let showStylized: boolean = true;
   onMount(() => {
     getSettings();
   });
@@ -114,17 +116,57 @@
   </article>
   {#if pipelineParams}
     <article class="my-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-      {#if isImageMode}
-        <div class="sm:col-start-1">
+      {#if isImageMode && showOriginal}
+        <div class={showStylized ? 'sm:col-start-1' : 'sm:col-span-2'}>
+          <div class="mb-2 flex justify-between items-center">
+            <span class="text-sm font-semibold">Original</span>
+            <Button 
+              on:click={() => showOriginal = false}
+              classList={'text-xs px-2 py-1'}
+            >
+              Hide
+            </Button>
+          </div>
           <VideoInput
             width={Number(pipelineParams.width.default)}
             height={Number(pipelineParams.height.default)}
           ></VideoInput>
         </div>
       {/if}
-      <div class={isImageMode ? 'sm:col-start-2' : 'col-span-2'}>
-        <ImagePlayer />
-      </div>
+      {#if showStylized}
+        <div class={isImageMode ? (showOriginal ? 'sm:col-start-2' : 'sm:col-span-2') : 'col-span-2'}>
+          <div class="mb-2 flex justify-between items-center">
+            <span class="text-sm font-semibold">Stylized</span>
+            <Button 
+              on:click={() => showStylized = false}
+              classList={'text-xs px-2 py-1'}
+            >
+              Hide
+            </Button>
+          </div>
+          <ImagePlayer />
+        </div>
+      {/if}
+      {#if isImageMode && !showOriginal}
+        <div class="sm:col-span-2">
+          <Button 
+            on:click={() => showOriginal = true}
+            classList={'text-sm px-3 py-2 mb-2'}
+          >
+            Show Original
+          </Button>
+        </div>
+      {/if}
+      {#if !showStylized}
+        <div class="sm:col-span-2">
+          <Button 
+            on:click={() => showStylized = true}
+            classList={'text-sm px-3 py-2 mb-2'}
+          >
+            Show Stylized
+          </Button>
+        </div>
+      {/if}
       <div class="sm:col-span-2">
         <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2'}>
           {#if isLCMRunning}
