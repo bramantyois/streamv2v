@@ -146,6 +146,15 @@
           </div>
           <ImagePlayer />
         </div>
+      {:else}
+        <div class={isImageMode ? 'sm:col-span-2' : 'col-span-2'}>
+          <Button 
+            on:click={() => showStylized = true}
+            classList={'text-sm px-3 py-2'}
+          >
+            Show Stylized
+          </Button>
+        </div>
       {/if}
       {#if isImageMode && !showOriginal}
         <div class="sm:col-span-2">
@@ -167,7 +176,6 @@
           </Button>
         </div>
       {/if}
-      <div class="sm:col-span-2">
         <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2'}>
           {#if isLCMRunning}
             Stop
