@@ -22,7 +22,7 @@
 </script>
 
 <div
-  class="relative mx-auto aspect-square max-w-lg self-center overflow-hidden rounded-lg border border-slate-300"
+  class="relative w-full aspect-square self-center overflow-hidden rounded-lg border border-slate-300"
 >
   <!-- svelte-ignore a11y-missing-attribute -->
   {#if isLCMRunning && $streamId}
