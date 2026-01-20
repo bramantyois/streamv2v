@@ -22,13 +22,13 @@
 </script>
 
 <div
-  class="relative mx-auto max-h-full self-center overflow-hidden rounded-lg border border-slate-300"
+  class="relative mx-auto aspect-square max-w-lg self-center overflow-hidden rounded-lg border border-slate-300"
 >
   <!-- svelte-ignore a11y-missing-attribute -->
   {#if isLCMRunning && $streamId}
     <img
       bind:this={imageEl}
-      class="max-h-full max-w-full h-auto w-auto rounded-lg object-contain"
+      class="aspect-square w-full rounded-lg"
       src={'/api/stream/' + $streamId}
     />
     <div class="absolute bottom-1 right-1">
@@ -43,7 +43,7 @@
     </div>
   {:else}
     <img
-      class="max-h-full max-w-full h-auto w-auto rounded-lg object-contain"
+      class="aspect-square w-full rounded-lg"
       src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
     />
   {/if}
