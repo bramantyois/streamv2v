@@ -95,7 +95,7 @@
   ></script>
 </svelte:head>
 
-<main class="container mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4">
+<main class="container mx-auto flex max-w-full flex-col gap-3 px-4 py-4 h-screen">
   <Warning bind:message={warningMessage}></Warning>
   <article class="text-center">
     {#if pageContent}
@@ -114,7 +114,7 @@
     {/if}
   </article>
   {#if pipelineParams}
-    <article class="my-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <article class="flex-1 flex flex-col gap-3">
       {#if isImageMode}
         <div style="display: none;">
           <VideoInput
@@ -124,7 +124,7 @@
         </div>
       {/if}
       {#if showStylized}
-        <div class="col-span-2">
+        <div class="flex-1 flex flex-col">
           <div class="mb-2 flex justify-between items-center">
             <span class="text-sm font-semibold">Stylized</span>
             <Button 
@@ -134,10 +134,12 @@
               Hide
             </Button>
           </div>
-          <ImagePlayer />
+          <div class="flex-1 flex items-center justify-center">
+            <ImagePlayer />
+          </div>
         </div>
       {:else}
-        <div class="col-span-2">
+        <div class="flex-1 flex items-center justify-center">
           <Button 
             on:click={() => showStylized = true}
             classList={'text-sm px-3 py-2'}
@@ -146,8 +148,8 @@
           </Button>
         </div>
       {/if}
-      <div class="sm:col-span-2">
-        <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2'}>
+      <div class="w-full">
+        <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2 w-full'}>
           {#if isLCMRunning}
             Stop
           {:else}
