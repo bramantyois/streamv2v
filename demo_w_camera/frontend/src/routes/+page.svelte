@@ -153,8 +153,8 @@
         </div>
       {/if}
       {#if showStylized}
-        <div class="col-span-2" bind:this={videoContainer}>
-          <div class="mb-2 flex justify-between items-center">
+        <div class="col-span-2 flex flex-col items-center justify-center min-h-[70vh]" bind:this={videoContainer}>
+          <div class="mb-2 flex justify-between items-center w-full">
             <span class="text-sm font-semibold">Stylized</span>
             <div class="flex gap-2">
               <Button 
