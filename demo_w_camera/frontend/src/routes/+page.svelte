@@ -115,6 +115,14 @@
   </article>
   {#if pipelineParams}
     <article class="my-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {#if isImageMode}
+        <div style="display: none;">
+          <VideoInput
+            width={Number(pipelineParams.width.default)}
+            height={Number(pipelineParams.height.default)}
+          ></VideoInput>
+        </div>
+      {/if}
       {#if showStylized}
         <div class="col-span-2">
           <div class="mb-2 flex justify-between items-center">
