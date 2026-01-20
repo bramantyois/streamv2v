@@ -153,8 +153,8 @@
         </div>
       {/if}
       {#if showStylized}
-        <div class="col-span-2 flex flex-col items-center justify-center min-h-[60vh] fullscreen-container" bind:this={videoContainer}>
-          <div class="mb-2 flex justify-between items-center w-full max-w-lg {isFullscreen ? 'px-4' : ''}">
+        <div class="col-span-2 flex flex-col items-center justify-center min-h-[60vh]" bind:this={videoContainer}>
+          <div class="mb-2 flex justify-between items-center w-full max-w-lg">
             <span class="text-sm font-semibold">Stylized</span>
             <div class="flex gap-2">
               <Button 
@@ -171,9 +171,7 @@
               </Button>
             </div>
           </div>
-          <div class={isFullscreen ? 'fullscreen-image-wrapper' : ''}>
-            <ImagePlayer />
-          </div>
+          <ImagePlayer />
         </div>
       {:else}
         <div class="col-span-2">
@@ -208,17 +206,5 @@
 <style lang="postcss">
   :global(html) {
     @apply text-black dark:bg-gray-900 dark:text-white;
-  }
-  
-  .fullscreen-container:fullscreen {
-    @apply bg-black flex items-center justify-center h-screen w-screen p-4;
-  }
-  
-  .fullscreen-container:fullscreen .fullscreen-image-wrapper {
-    @apply w-full h-full flex items-center justify-center;
-  }
-  
-  .fullscreen-container:fullscreen .fullscreen-image-wrapper :global(> div) {
-    @apply max-w-full max-h-[calc(100vh-5rem)] w-auto h-auto;
   }
 </style>
