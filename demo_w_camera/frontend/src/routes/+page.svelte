@@ -138,16 +138,7 @@
           </Button>
         </div>
       {/if}
-      {#if !showStylized}
-        <div class="sm:col-span-2">
-          <Button 
-            on:click={() => showStylized = true}
-            classList={'text-sm px-3 py-2 mb-2'}
-          >
-            Show Stylized
-          </Button>
-        </div>
-      {/if}
+      <div class="sm:col-span-2">
         <Button on:click={toggleLcmLive} {disabled} classList={'text-lg my-1 p-2'}>
           {#if isLCMRunning}
             Stop
