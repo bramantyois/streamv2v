@@ -21,6 +21,35 @@
   let queueCheckerRunning: boolean = false;
   let warningMessage: string = '';
   let showStylized: boolean = true;
+  let videoContainer: HTMLDivElement;
+  let isFullscreen: boolean = false;
+
+  onMount(() => {
+    getSettings();
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  });
+
+  function handleFullscreenChange() {
+    isFullscreen = !!document.fullscreenElement;
+  }
+
+  async function toggleFullscreen() {
+    if (!videoContainer) return;
+    
+    try {
+      if (!document.fullscreenElement) {
+        await videoContainer.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.error('Error toggling fullscreen:', err);
+    }
+  }
+
   onMount(() => {
     getSettings();
   });
@@ -124,15 +153,23 @@
         </div>
       {/if}
       {#if showStylized}
-        <div class="col-span-2">
+        <div class="col-span-2" bind:this={videoContainer}>
           <div class="mb-2 flex justify-between items-center">
             <span class="text-sm font-semibold">Stylized</span>
-            <Button 
-              on:click={() => showStylized = false}
-              classList={'text-xs px-2 py-1'}
-            >
-              Hide
-            </Button>
+            <div class="flex gap-2">
+              <Button 
+                on:click={toggleFullscreen}
+                classList={'text-xs px-2 py-1'}
+              >
+                {isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+              </Button>
+              <Button 
+                on:click={() => showStylized = false}
+                classList={'text-xs px-2 py-1'}
+              >
+                Hide
+              </Button>
+            </div>
           </div>
           <ImagePlayer />
         </div>
